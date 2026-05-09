@@ -17,8 +17,12 @@ create table if not exists public.tasks (
   assignee_id uuid not null references public.profiles(id) on delete cascade,
   deadline timestamptz not null,
   status text not null default 'pending' check (status in ('pending', 'completed')),
+  completed_at timestamptz,
   created_at timestamptz not null default now()
 );
+
+alter table public.tasks
+add column if not exists completed_at timestamptz;
 
 create table if not exists public.rewards (
   id uuid primary key default gen_random_uuid(),
@@ -31,6 +35,7 @@ create table if not exists public.rewards (
 create index if not exists profiles_family_id_idx on public.profiles(family_id);
 create index if not exists tasks_family_id_idx on public.tasks(family_id);
 create index if not exists tasks_assignee_id_idx on public.tasks(assignee_id);
+create index if not exists tasks_completed_at_idx on public.tasks(completed_at);
 create index if not exists rewards_family_id_idx on public.rewards(family_id);
 
 create or replace function public.current_family_id()
@@ -113,6 +118,16 @@ on public.rewards
 for insert
 to authenticated
 with check (
+  public.current_profile_role() = 'mother'
+  and family_id = public.current_family_id()
+);
+
+drop policy if exists "rewards_delete_by_mother" on public.rewards;
+create policy "rewards_delete_by_mother"
+on public.rewards
+for delete
+to authenticated
+using (
   public.current_profile_role() = 'mother'
   and family_id = public.current_family_id()
 );

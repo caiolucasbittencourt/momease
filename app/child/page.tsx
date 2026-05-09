@@ -4,6 +4,7 @@ import { EmptyState } from "@/components/EmptyState";
 import { MessageBanner } from "@/components/MessageBanner";
 import { requireProfile } from "@/lib/auth";
 import type { Reward, Task } from "@/lib/types";
+import { Check, Gift, Star } from "lucide-react";
 
 type ChildPageProps = {
   searchParams: Promise<{
@@ -25,7 +26,9 @@ export default async function ChildPage({ searchParams }: ChildPageProps) {
 
   const { data: taskRows } = await supabase
     .from("tasks")
-    .select("id, family_id, title, details, assignee_id, deadline, status")
+    .select(
+      "id, family_id, title, details, assignee_id, deadline, status, completed_at"
+    )
     .eq("assignee_id", profile.id)
     .order("deadline", { ascending: true });
 
@@ -35,20 +38,29 @@ export default async function ChildPage({ searchParams }: ChildPageProps) {
     .eq("family_id", profile.family_id)
     .order("cost", { ascending: true });
 
-  const tasks = ((taskRows ?? []) as Task[]).sort((left, right) => {
-    if (left.status !== right.status) {
-      return left.status === "pending" ? -1 : 1;
-    }
+  const tasks = (taskRows ?? []) as Task[];
+  const pendingTasks = tasks
+    .filter((task) => task.status === "pending")
+    .sort(
+      (left, right) =>
+        new Date(left.deadline).getTime() - new Date(right.deadline).getTime()
+    );
+  const completedTasks = tasks
+    .filter((task) => task.status === "completed")
+    .sort((left, right) => {
+      const leftDate = new Date(left.completed_at ?? left.deadline).getTime();
+      const rightDate = new Date(right.completed_at ?? right.deadline).getTime();
 
-    return new Date(left.deadline).getTime() - new Date(right.deadline).getTime();
-  });
+      return rightDate - leftDate;
+    });
   const rewards = (rewardRows ?? []) as Reward[];
 
   return (
     <>
       <DashboardHeader
         aside={
-          <div className="rounded-md border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-900">
+          <div className="inline-flex items-center gap-2 rounded-md border border-rose/20 bg-blush px-4 py-2 text-sm font-semibold text-berry">
+            <Star aria-hidden="true" size={16} strokeWidth={2.25} />
             {profile.coins} estrelas
           </div>
         }
@@ -68,47 +80,83 @@ export default async function ChildPage({ searchParams }: ChildPageProps) {
               </p>
             </div>
 
-            {tasks.length === 0 ? (
-              <EmptyState>Nenhuma tarefa atribuída.</EmptyState>
+            {pendingTasks.length === 0 ? (
+              <EmptyState>Nenhuma tarefa pendente.</EmptyState>
             ) : (
               <div className="grid gap-3">
-                {tasks.map((task) => {
-                  const isCompleted = task.status === "completed";
-
-                  return (
-                    <article
-                      className="rounded-md border border-stone-200 bg-paper p-4"
-                      key={task.id}
-                    >
-                      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                        <div>
-                          <h3 className="font-semibold text-ink">{task.title}</h3>
-                          {task.details ? (
-                            <p className="mt-1 text-sm text-stone-600">
-                              {task.details}
-                            </p>
-                          ) : null}
-                          <p className="mt-3 text-sm text-stone-600">
-                            Prazo: {formatDate(task.deadline)}
+                {pendingTasks.map((task) => (
+                  <article
+                    className="rounded-md border border-stone-200 bg-paper p-4"
+                    key={task.id}
+                  >
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                      <div>
+                        <h3 className="font-semibold text-ink">{task.title}</h3>
+                        {task.details ? (
+                          <p className="mt-1 text-sm text-stone-600">
+                            {task.details}
                           </p>
-                        </div>
-
-                        {isCompleted ? (
-                          <span className="w-fit rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-800">
-                            Concluída
-                          </span>
-                        ) : (
-                          <form action={completeTask}>
-                            <input name="task_id" type="hidden" value={task.id} />
-                            <button className="button" type="submit">
-                              Concluir
-                            </button>
-                          </form>
-                        )}
+                        ) : null}
+                        <p className="mt-3 text-sm text-stone-600">
+                          Prazo: {formatDate(task.deadline)}
+                        </p>
                       </div>
-                    </article>
-                  );
-                })}
+
+                      <form action={completeTask}>
+                        <input name="task_id" type="hidden" value={task.id} />
+                        <button className="button" type="submit">
+                          <Check aria-hidden="true" size={16} strokeWidth={2.25} />
+                          Concluir
+                        </button>
+                      </form>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            )}
+          </section>
+
+          <section className="surface space-y-5">
+            <div>
+              <h2 className="section-title">Histórico de tarefas</h2>
+              <p className="text-sm text-stone-600">
+                Suas tarefas concluídas ficam registradas aqui.
+              </p>
+            </div>
+
+            {completedTasks.length === 0 ? (
+              <EmptyState>Nenhuma tarefa concluída ainda.</EmptyState>
+            ) : (
+              <div className="grid gap-3">
+                {completedTasks.map((task) => (
+                  <article
+                    className="rounded-md border border-pink-100 bg-white p-4"
+                    key={task.id}
+                  >
+                    <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+                      <div>
+                        <h3 className="font-semibold text-ink">{task.title}</h3>
+                        {task.details ? (
+                          <p className="mt-1 text-sm text-stone-600">
+                            {task.details}
+                          </p>
+                        ) : null}
+                      </div>
+                      <span className="w-fit rounded-full bg-blush px-3 py-1 text-xs font-semibold text-berry">
+                        Concluída
+                      </span>
+                    </div>
+                    <div className="mt-3 space-y-1 text-sm text-stone-600">
+                      <p>Prazo: {formatDate(task.deadline)}</p>
+                      <p>
+                        Conclusão:{" "}
+                        {task.completed_at
+                          ? formatDate(task.completed_at)
+                          : "data não registrada"}
+                      </p>
+                    </div>
+                  </article>
+                ))}
               </div>
             )}
           </section>
@@ -132,13 +180,14 @@ export default async function ChildPage({ searchParams }: ChildPageProps) {
 
                   return (
                     <article
-                      className="rounded-md border border-stone-200 p-4"
+                      className="rounded-md border border-pink-100 p-4"
                       key={reward.id}
                     >
                       <div className="flex items-start justify-between gap-3">
                         <div>
                           <h3 className="font-semibold text-ink">{reward.title}</h3>
-                          <p className="mt-1 text-sm font-semibold text-coral">
+                          <p className="mt-1 inline-flex items-center gap-1 text-sm font-semibold text-rose">
+                            <Star aria-hidden="true" size={15} strokeWidth={2.25} />
                             {reward.cost} estrelas
                           </p>
                         </div>
@@ -153,6 +202,7 @@ export default async function ChildPage({ searchParams }: ChildPageProps) {
                             disabled={!canRedeem}
                             type="submit"
                           >
+                            <Gift aria-hidden="true" size={16} strokeWidth={2.25} />
                             Resgatar
                           </button>
                         </form>

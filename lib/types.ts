@@ -17,6 +17,7 @@ export type Task = {
   assignee_id: string;
   deadline: string;
   status: TaskStatus;
+  completed_at: string | null;
 };
 
 export type Reward = {

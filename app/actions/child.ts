@@ -59,7 +59,7 @@ export async function completeTask(formData: FormData) {
 
   const { data: updatedTask, error: taskError } = await admin
     .from("tasks")
-    .update({ status: "completed" })
+    .update({ completed_at: new Date().toISOString(), status: "completed" })
     .eq("id", task.id)
     .eq("assignee_id", profile.id)
     .eq("status", "pending")

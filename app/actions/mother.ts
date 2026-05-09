@@ -172,3 +172,34 @@ export async function createReward(formData: FormData) {
   revalidatePath("/mother");
   redirect(redirectWithMessage("/mother", "notice", "Prêmio criado."));
 }
+
+export async function deleteReward(formData: FormData) {
+  const { supabase, profile } = await requireProfile("mother");
+  const rewardId = formText(formData, "reward_id");
+
+  if (!rewardId) {
+    redirect(redirectWithMessage("/mother", "error", "Prêmio inválido."));
+  }
+
+  const { data, error } = await supabase
+    .from("rewards")
+    .delete()
+    .eq("id", rewardId)
+    .eq("family_id", profile.family_id)
+    .select("id")
+    .maybeSingle<{ id: string }>();
+
+  if (error || !data) {
+    redirect(
+      redirectWithMessage(
+        "/mother",
+        "error",
+        error?.message ?? "Prêmio não encontrado para esta família."
+      )
+    );
+  }
+
+  revalidatePath("/mother");
+  revalidatePath("/child");
+  redirect(redirectWithMessage("/mother", "notice", "Prêmio excluído."));
+}

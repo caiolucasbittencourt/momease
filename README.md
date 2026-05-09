@@ -17,6 +17,7 @@ MomEase ajuda mães a organizar tarefas da casa, acompanhar a participação dos
 - Supabase Auth e Database
 - Server Actions para regras de negócio
 - Tailwind CSS
+- Lucide React
 - TypeScript
 
 ## Setup

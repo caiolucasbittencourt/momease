@@ -4,7 +4,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "MomEase",
-  description: "MVP de tarefas, estrelas e recompensas para famílias."
+  description: "Tarefas, estrelas e recompensas para famílias."
 };
 
 export default function RootLayout({

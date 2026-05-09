@@ -1,4 +1,6 @@
 import { logout } from "@/app/actions/auth";
+import { BrandWordmark } from "@/components/BrandWordmark";
+import { LogOut } from "lucide-react";
 
 type DashboardHeaderProps = {
   name: string;
@@ -12,12 +14,10 @@ export function DashboardHeader({
   aside
 }: DashboardHeaderProps) {
   return (
-    <header className="border-b border-stone-200 bg-white/85 backdrop-blur">
+    <header className="border-b border-pink-100 bg-white">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 py-5 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-coral">
-            MomEase
-          </p>
+        <div className="space-y-2">
+          <BrandWordmark compact />
           <h1 className="text-2xl font-bold text-ink sm:text-3xl">{name}</h1>
           <p className="text-sm text-stone-600">{roleLabel}</p>
         </div>
@@ -26,6 +26,7 @@ export function DashboardHeader({
           {aside}
           <form action={logout}>
             <button className="button-secondary" type="submit">
+              <LogOut aria-hidden="true" size={16} strokeWidth={2.25} />
               Sair
             </button>
           </form>

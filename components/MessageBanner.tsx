@@ -24,7 +24,7 @@ export function MessageBanner({ error, notice }: MessageBannerProps) {
   }
 
   return (
-    <div className="rounded-md border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-900">
+    <div className="rounded-md border border-rose/20 bg-blush px-4 py-3 text-sm font-medium text-berry">
       {noticeMessage}
     </div>
   );

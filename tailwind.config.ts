@@ -9,10 +9,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: "#17201d",
-        leaf: "#14746f",
-        coral: "#d95d39",
-        paper: "#fbfcf8"
+        ink: "#3a2330",
+        rose: "#d94f8a",
+        berry: "#9f2d5a",
+        blush: "#fff1f7",
+        paper: "#fff9fc"
       }
     }
   },

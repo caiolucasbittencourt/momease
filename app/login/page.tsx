@@ -1,6 +1,10 @@
 import Link from "next/link";
+import { LockKeyhole, Mail } from "lucide-react";
 
 import { login } from "@/app/actions/auth";
+import { AuthField } from "@/components/AuthField";
+import { AuthShell } from "@/components/AuthShell";
+import { BrandWordmark } from "@/components/BrandWordmark";
 import { MessageBanner } from "@/components/MessageBanner";
 
 type LoginPageProps = {
@@ -14,55 +18,48 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
   const params = await searchParams;
 
   return (
-    <main className="flex min-h-screen items-center justify-center px-4 py-10">
-      <section className="w-full max-w-md space-y-6">
-        <div className="space-y-2">
-          <p className="text-sm font-semibold uppercase tracking-wide text-coral">
-            MomEase
-          </p>
-          <h1 className="text-3xl font-bold text-ink">Entrar</h1>
-          <p className="text-sm text-stone-600">
-            Acesso único para mães e filhos.
-          </p>
+    <AuthShell>
+      <section className="space-y-7">
+        <div className="space-y-4 text-center">
+          <BrandWordmark />
         </div>
 
         <MessageBanner error={params.error} notice={params.notice} />
 
-        <form action={login} className="surface space-y-4">
-          <label className="field">
-            <span className="label">Email</span>
-            <input
-              className="input"
-              name="email"
-              type="email"
-              autoComplete="email"
-              required
-            />
-          </label>
+        <form action={login} className="space-y-5">
+          <AuthField
+            autoComplete="email"
+            icon={Mail}
+            label="E-mail"
+            name="email"
+            placeholder="Seu e-mail"
+            type="email"
+          />
 
-          <label className="field">
-            <span className="label">Senha</span>
-            <input
-              className="input"
-              name="password"
-              type="password"
-              autoComplete="current-password"
-              required
-            />
-          </label>
+          <AuthField
+            autoComplete="current-password"
+            icon={LockKeyhole}
+            label="Senha"
+            name="password"
+            placeholder="Digite sua senha"
+            type="password"
+          />
 
           <button className="button w-full" type="submit">
             Entrar
           </button>
         </form>
 
-        <p className="text-center text-sm text-stone-600">
-          Mãe nova no MomEase?{" "}
-          <Link className="font-semibold text-leaf hover:underline" href="/register">
-            Criar cadastro
-          </Link>
-        </p>
+        <div className="flex items-center gap-4 text-xs font-medium uppercase tracking-wide text-stone-400">
+          <span className="h-px flex-1 bg-pink-100" />
+          ou
+          <span className="h-px flex-1 bg-pink-100" />
+        </div>
+
+        <Link className="button-secondary w-full" href="/register">
+          Cadastre-se gratuitamente
+        </Link>
       </section>
-    </main>
+    </AuthShell>
   );
 }

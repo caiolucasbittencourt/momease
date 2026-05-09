@@ -18,9 +18,9 @@ body {
   min-height: 100%;
   margin: 0;
   background:
-    radial-gradient(circle at top left, rgba(20, 116, 111, 0.08), transparent 32rem),
-    #fbfcf8;
-  color: #17201d;
+    radial-gradient(circle at top left, rgba(217, 79, 138, 0.14), transparent 32rem),
+    #fff9fc;
+  color: #3a2330;
   font-family:
     Inter,
     ui-sans-serif,
@@ -41,19 +41,19 @@ body {
   }
 
   .input {
-    @apply w-full rounded-md border border-stone-300 bg-white px-3 py-2 text-sm text-stone-950 outline-none transition focus:border-leaf focus:ring-2 focus:ring-leaf/20;
+    @apply w-full rounded-md border border-pink-200 bg-white px-3 py-2 text-sm text-stone-950 outline-none transition focus:border-rose focus:ring-2 focus:ring-rose/20;
   }
 
   .button {
-    @apply inline-flex min-h-10 items-center justify-center rounded-md bg-leaf px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-800 disabled:cursor-not-allowed disabled:bg-stone-300 disabled:text-stone-600;
+    @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-md bg-rose px-4 py-2 text-sm font-semibold text-white transition hover:bg-berry disabled:cursor-not-allowed disabled:bg-stone-300 disabled:text-stone-600;
   }
 
   .button-secondary {
-    @apply inline-flex min-h-10 items-center justify-center rounded-md border border-stone-300 bg-white px-4 py-2 text-sm font-semibold text-stone-800 transition hover:border-leaf hover:text-leaf;
+    @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-md border border-pink-200 bg-white px-4 py-2 text-sm font-semibold text-stone-800 transition hover:border-rose hover:text-rose;
   }
 
   .surface {
-    @apply rounded-lg border border-stone-200 bg-white p-5 shadow-sm;
+    @apply rounded-lg border border-pink-100 bg-white p-5 shadow-sm;
   }
 
   .section-title {

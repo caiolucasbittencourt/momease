@@ -22,7 +22,7 @@ export default async function RegisterPage({
   return (
     <AuthShell>
       <section className="space-y-7">
-        <div className="space-y-4 text-center">
+        <div className="-mb-3 text-center sm:-mb-4">
           <BrandWordmark />
         </div>
 
@@ -34,7 +34,7 @@ export default async function RegisterPage({
             icon={User}
             label="Nome"
             name="name"
-            placeholder="Seu nome"
+            placeholder="Digite seu nome"
             type="text"
           />
 
@@ -43,7 +43,7 @@ export default async function RegisterPage({
             icon={Mail}
             label="E-mail"
             name="email"
-            placeholder="Seu e-mail"
+            placeholder="Digite seu e-mail"
             type="email"
           />
 

@@ -20,7 +20,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
   return (
     <AuthShell>
       <section className="space-y-7">
-        <div className="space-y-4 text-center">
+        <div className="-mb-3 text-center sm:-mb-4">
           <BrandWordmark />
         </div>
 
@@ -32,7 +32,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
             icon={Mail}
             label="E-mail"
             name="email"
-            placeholder="Seu e-mail"
+            placeholder="Digite seu e-mail"
             type="email"
           />
 

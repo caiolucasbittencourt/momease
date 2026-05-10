@@ -4,7 +4,12 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "MomEase",
-  description: "Tarefas, estrelas e recompensas para famílias."
+  description: "Tarefas, estrelas e recompensas para familias.",
+  icons: {
+    apple: "/images/logo.svg",
+    icon: "/images/logo.svg",
+    shortcut: "/images/logo.svg",
+  },
 };
 
 export default function RootLayout({

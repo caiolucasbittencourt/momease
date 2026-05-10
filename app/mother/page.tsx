@@ -83,7 +83,7 @@ export default async function MotherPage({ searchParams }: MotherPageProps) {
 
   return (
     <>
-      <DashboardHeader name={`Olá, ${profile.name}`} roleLabel="Painel da mãe" />
+      <DashboardHeader name={`Olá, ${profile.name}`} />
 
       <main className="mx-auto grid w-full max-w-6xl gap-6 px-4 py-6 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,24rem)]">
         <div className="space-y-6">

@@ -148,7 +148,7 @@ export default async function ChildPage({ searchParams }: ChildPageProps) {
                           </p>
                         ) : null}
                       </div>
-                      <span className="w-fit rounded-full bg-blush px-3 py-1 text-xs font-semibold text-berry">
+                      <span className="w-fit rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-800">
                         Concluída
                       </span>
                     </div>

@@ -186,7 +186,13 @@ export async function createReward(formData: FormData) {
   }
 
   revalidatePath("/mother");
-  redirect(redirectWithMessage("/mother", "notice", "Prêmio criado com sucesso. Ele já está disponível na loja para os filhos resgatarem."));
+  redirect(
+    redirectWithMessage(
+      "/mother",
+      "notice",
+      "Prêmio criado com sucesso. Ele já está disponível na loja para seus filhos resgatarem.",
+    ),
+  );
 }
 
 export async function deleteReward(formData: FormData) {
@@ -217,5 +223,11 @@ export async function deleteReward(formData: FormData) {
 
   revalidatePath("/mother");
   revalidatePath("/child");
-  redirect(redirectWithMessage("/mother", "notice", "Prêmio excluído com sucesso. A loja dos filhos foi atualizada."));
+  redirect(
+    redirectWithMessage(
+      "/mother",
+      "notice",
+      "Prêmio excluído com sucesso. A loja dos filhos foi atualizada.",
+    ),
+  );
 }

@@ -128,7 +128,7 @@ export default async function MotherPage({ searchParams }: MotherPageProps) {
                 <textarea
                   className="input min-h-24 resize-y"
                   name="details"
-                  placeholder=""
+                  placeholder="Opcional"
                 />
               </label>
 
@@ -194,7 +194,7 @@ export default async function MotherPage({ searchParams }: MotherPageProps) {
                               </p>
                             ) : null}
                           </div>
-                          <span className="w-fit rounded-full bg-blush px-3 py-1 text-xs font-semibold text-berry">
+                          <span className="w-fit rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-900">
                             Pendente
                           </span>
                         </div>
@@ -238,7 +238,7 @@ export default async function MotherPage({ searchParams }: MotherPageProps) {
                             </p>
                           ) : null}
                         </div>
-                        <span className="w-fit rounded-full bg-blush px-3 py-1 text-xs font-semibold text-berry">
+                        <span className="w-fit rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-800">
                           Concluída
                         </span>
                       </div>
@@ -272,12 +272,23 @@ export default async function MotherPage({ searchParams }: MotherPageProps) {
             <form action={createChildAccount} className="space-y-4">
               <label className="field">
                 <span className="label">Nome</span>
-                <input className="input" name="name" required />
+                <input
+                  className="input"
+                  name="name"
+                  placeholder="Digite um nome"
+                  required
+                />
               </label>
 
               <label className="field">
                 <span className="label">E-mail</span>
-                <input className="input" name="email" type="email" required />
+                <input
+                  className="input"
+                  name="email"
+                  placeholder="Digite um e-mail"
+                  type="email"
+                  required
+                />
               </label>
 
               <label className="field">
@@ -286,6 +297,7 @@ export default async function MotherPage({ searchParams }: MotherPageProps) {
                   className="input"
                   minLength={6}
                   name="password"
+                  placeholder="Digite uma senha"
                   type="password"
                   required
                 />
@@ -348,6 +360,7 @@ export default async function MotherPage({ searchParams }: MotherPageProps) {
                   className="input"
                   min={1}
                   name="cost"
+                  placeholder="Ex: 5"
                   type="number"
                   required
                 />

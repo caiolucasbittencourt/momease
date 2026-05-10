@@ -42,7 +42,7 @@ export function MessageBanner({ error, notice }: MessageBannerProps) {
   }
 
   return (
-    <div className="flex items-center justify-between gap-3 rounded-md border border-rose/20 bg-blush px-4 py-3 text-sm font-medium text-berry">
+    <div className="flex items-center justify-between gap-3 rounded-md border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-800">
       <p className="flex-1">{noticeMessage}</p>
       <button
         aria-label="Fechar aviso"

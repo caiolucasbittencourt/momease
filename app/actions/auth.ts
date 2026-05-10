@@ -192,5 +192,5 @@ export async function logout() {
   const supabase = await createSupabaseServerClient();
   await supabase.auth.signOut();
   revalidatePath("/", "layout");
-  redirect(redirectWithMessage("/login", "notice", "Você saiu da conta."));
+  redirect("/login");
 }

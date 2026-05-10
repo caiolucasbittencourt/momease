@@ -133,7 +133,7 @@ export async function registerMother(formData: FormData) {
 
   revalidatePath("/", "layout");
   redirect(
-    redirectWithMessage("/mother", "notice", "Cadastro concluído. Bem-vinda!")
+    redirectWithMessage("/mother", "notice", "Cadastro concluído. Bem-vinda! Para criar tarefas, primeiro adicione um filho em Membros.")
   );
 }
 

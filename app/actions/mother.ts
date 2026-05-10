@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 import {
   formOptionalText,
   formText,
-  redirectWithMessage
+  redirectWithMessage,
 } from "@/app/actions/helpers";
 import { requireProfile } from "@/lib/auth";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
@@ -22,8 +22,8 @@ export async function createChildAccount(formData: FormData) {
       redirectWithMessage(
         "/mother",
         "error",
-        "Informe nome, email e senha temporária com pelo menos 6 caracteres."
-      )
+        "Informe nome, email e senha temporária com pelo menos 6 caracteres.",
+      ),
     );
   }
 
@@ -36,8 +36,8 @@ export async function createChildAccount(formData: FormData) {
       redirectWithMessage(
         "/mother",
         "error",
-        "Configure SUPABASE_SERVICE_ROLE_KEY para criar contas de filhos."
-      )
+        "Configure SUPABASE_SERVICE_ROLE_KEY para criar contas de filhos.",
+      ),
     );
   }
 
@@ -48,8 +48,8 @@ export async function createChildAccount(formData: FormData) {
     user_metadata: {
       name,
       role: "child",
-      family_id: profile.family_id
-    }
+      family_id: profile.family_id,
+    },
   });
 
   if (error || !data.user) {
@@ -57,8 +57,8 @@ export async function createChildAccount(formData: FormData) {
       redirectWithMessage(
         "/mother",
         "error",
-        error?.message ?? "Não foi possível criar o usuário filho."
-      )
+        error?.message ?? "Não foi possível criar o usuário filho.",
+      ),
     );
   }
 
@@ -67,7 +67,7 @@ export async function createChildAccount(formData: FormData) {
     role: "child",
     family_id: profile.family_id,
     name,
-    coins: 0
+    coins: 0,
   });
 
   if (profileError) {
@@ -76,13 +76,19 @@ export async function createChildAccount(formData: FormData) {
       redirectWithMessage(
         "/mother",
         "error",
-        `Usuário removido porque o perfil do filho não foi criado: ${profileError.message}`
-      )
+        `Usuário removido porque o perfil do filho não foi criado: ${profileError.message}`,
+      ),
     );
   }
 
   revalidatePath("/mother");
-  redirect(redirectWithMessage("/mother", "notice", "Filho adicionado."));
+  redirect(
+    redirectWithMessage(
+      "/mother",
+      "notice",
+      "Filho adicionado com sucesso. Agora você já pode criar tarefas para ele na seção Tarefas.",
+    ),
+  );
 }
 
 export async function createTask(formData: FormData) {
@@ -98,14 +104,18 @@ export async function createTask(formData: FormData) {
       redirectWithMessage(
         "/mother",
         "error",
-        "Informe tarefa, responsável e prazo válido."
-      )
+        "Informe tarefa, responsável e prazo válido.",
+      ),
     );
   }
 
   if (deadline.getTime() <= Date.now()) {
     redirect(
-      redirectWithMessage("/mother", "error", "O prazo precisa estar no futuro.")
+      redirectWithMessage(
+        "/mother",
+        "error",
+        "O prazo precisa estar no futuro.",
+      ),
     );
   }
 
@@ -122,8 +132,8 @@ export async function createTask(formData: FormData) {
       redirectWithMessage(
         "/mother",
         "error",
-        "Responsável inválido para esta família."
-      )
+        "Responsável inválido para esta família.",
+      ),
     );
   }
 
@@ -133,7 +143,7 @@ export async function createTask(formData: FormData) {
     details,
     assignee_id: child.id,
     deadline: deadline.toISOString(),
-    status: "pending"
+    status: "pending",
   });
 
   if (error) {
@@ -141,7 +151,13 @@ export async function createTask(formData: FormData) {
   }
 
   revalidatePath("/mother");
-  redirect(redirectWithMessage("/mother", "notice", "Tarefa criada."));
+  redirect(
+    redirectWithMessage(
+      "/mother",
+      "notice",
+      "Tarefa criada com sucesso. Ela já aparece na lista de tarefas ativas para acompanhamento.",
+    ),
+  );
 }
 
 export async function createReward(formData: FormData) {
@@ -154,15 +170,15 @@ export async function createReward(formData: FormData) {
       redirectWithMessage(
         "/mother",
         "error",
-        "Informe um prêmio e custo em estrelas maior que zero."
-      )
+        "Informe um prêmio e custo em estrelas maior que zero.",
+      ),
     );
   }
 
   const { error } = await supabase.from("rewards").insert({
     family_id: profile.family_id,
     title,
-    cost
+    cost,
   });
 
   if (error) {
@@ -170,7 +186,7 @@ export async function createReward(formData: FormData) {
   }
 
   revalidatePath("/mother");
-  redirect(redirectWithMessage("/mother", "notice", "Prêmio criado."));
+  redirect(redirectWithMessage("/mother", "notice", "Prêmio criado com sucesso. Ele já está disponível na loja para os filhos resgatarem."));
 }
 
 export async function deleteReward(formData: FormData) {
@@ -194,12 +210,12 @@ export async function deleteReward(formData: FormData) {
       redirectWithMessage(
         "/mother",
         "error",
-        error?.message ?? "Prêmio não encontrado para esta família."
-      )
+        error?.message ?? "Prêmio não encontrado para esta família.",
+      ),
     );
   }
 
   revalidatePath("/mother");
   revalidatePath("/child");
-  redirect(redirectWithMessage("/mother", "notice", "Prêmio excluído."));
+  redirect(redirectWithMessage("/mother", "notice", "Prêmio excluído com sucesso. A loja dos filhos foi atualizada."));
 }

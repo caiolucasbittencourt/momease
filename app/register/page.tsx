@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { LockKeyhole, Mail, User } from "lucide-react";
 
@@ -12,6 +13,10 @@ type RegisterPageProps = {
     error?: string | string[];
     notice?: string | string[];
   }>;
+};
+
+export const metadata: Metadata = {
+  title: "Cadastro",
 };
 
 export default async function RegisterPage({

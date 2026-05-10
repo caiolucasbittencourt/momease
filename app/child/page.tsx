@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { completeTask, redeemReward } from "@/app/actions/child";
 import { DashboardHeader } from "@/components/DashboardHeader";
 import { EmptyState } from "@/components/EmptyState";
@@ -11,6 +12,12 @@ type ChildPageProps = {
     error?: string | string[];
     notice?: string | string[];
   }>;
+};
+
+export const metadata: Metadata = {
+  title: {
+    absolute: "Dashboard | MonEase"
+  }
 };
 
 function formatDate(value: string) {

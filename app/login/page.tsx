@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { LockKeyhole, Mail } from "lucide-react";
 
@@ -12,6 +13,10 @@ type LoginPageProps = {
     error?: string | string[];
     notice?: string | string[];
   }>;
+};
+
+export const metadata: Metadata = {
+  title: "Login",
 };
 
 export default async function LoginPage({ searchParams }: LoginPageProps) {

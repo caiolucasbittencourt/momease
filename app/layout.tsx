@@ -3,7 +3,10 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "MomEase",
+  title: {
+    default: "MomEase",
+    template: "%s | MomEase",
+  },
   description: "Tarefas, estrelas e recompensas para familias.",
   icons: {
     apple: "/images/logo.svg",

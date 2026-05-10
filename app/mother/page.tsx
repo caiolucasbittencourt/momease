@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   createChildAccount,
   createReward,
@@ -16,6 +17,12 @@ type MotherPageProps = {
     error?: string | string[];
     notice?: string | string[];
   }>;
+};
+
+export const metadata: Metadata = {
+  title: {
+    absolute: "Dashboard | MonEase"
+  }
 };
 
 const taskSuggestions = [

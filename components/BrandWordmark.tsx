@@ -6,8 +6,8 @@ type BrandWordmarkProps = {
 
 export function BrandWordmark({ compact = false }: BrandWordmarkProps) {
   const widthClassName = compact
-    ? "w-[4.5rem] sm:w-20"
-    : "mx-auto w-28 sm:w-40";
+    ? "w-16 sm:w-[4.5rem]"
+    : "mx-auto w-24 sm:w-36";
 
   return (
     <div className={widthClassName}>
@@ -18,8 +18,8 @@ export function BrandWordmark({ compact = false }: BrandWordmarkProps) {
         priority={!compact}
         sizes={
           compact
-            ? "(min-width: 640px) 80px, 72px"
-            : "(min-width: 640px) 160px, 112px"
+            ? "(min-width: 640px) 72px, 64px"
+            : "(min-width: 640px) 144px, 96px"
         }
         src="/images/logo.svg"
         width={1500}

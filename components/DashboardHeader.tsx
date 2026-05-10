@@ -14,7 +14,7 @@ export function DashboardHeader({
   aside
 }: DashboardHeaderProps) {
   return (
-    <header className="border-b border-pink-100 bg-white">
+    <header className="bg-white">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 py-5 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-3 sm:gap-4">
           <BrandWordmark compact />
@@ -29,7 +29,7 @@ export function DashboardHeader({
         <div className="flex flex-wrap items-center gap-3">
           {aside}
           <form action={logout}>
-            <button className="button-secondary" type="submit">
+            <button className="button" type="submit">
               <LogOut aria-hidden="true" size={16} strokeWidth={2.25} />
               Sair
             </button>

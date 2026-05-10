@@ -16,14 +16,14 @@ type ChildPageProps = {
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Dashboard | MonEase"
-  }
+    absolute: "Dashboard | MonEase",
+  },
 };
 
 function formatDate(value: string) {
   return new Intl.DateTimeFormat("pt-BR", {
     dateStyle: "short",
-    timeStyle: "short"
+    timeStyle: "short",
   }).format(new Date(value));
 }
 
@@ -34,7 +34,7 @@ export default async function ChildPage({ searchParams }: ChildPageProps) {
   const { data: taskRows } = await supabase
     .from("tasks")
     .select(
-      "id, family_id, title, details, assignee_id, deadline, status, completed_at"
+      "id, family_id, title, details, assignee_id, deadline, status, completed_at",
     )
     .eq("assignee_id", profile.id)
     .order("deadline", { ascending: true });
@@ -50,29 +50,30 @@ export default async function ChildPage({ searchParams }: ChildPageProps) {
     .filter((task) => task.status === "pending")
     .sort(
       (left, right) =>
-        new Date(left.deadline).getTime() - new Date(right.deadline).getTime()
+        new Date(left.deadline).getTime() - new Date(right.deadline).getTime(),
     );
   const completedTasks = tasks
     .filter((task) => task.status === "completed")
     .sort((left, right) => {
       const leftDate = new Date(left.completed_at ?? left.deadline).getTime();
-      const rightDate = new Date(right.completed_at ?? right.deadline).getTime();
+      const rightDate = new Date(
+        right.completed_at ?? right.deadline,
+      ).getTime();
 
       return rightDate - leftDate;
     });
   const rewards = (rewardRows ?? []) as Reward[];
 
   return (
-    <>
+    <div className="min-h-screen bg-[#d94f8a]">
       <DashboardHeader
         aside={
-          <div className="inline-flex items-center gap-2 rounded-md border border-rose/20 bg-blush px-4 py-2 text-sm font-semibold text-berry">
+          <div className="inline-flex items-center gap-2 rounded-md bg-blush px-4 py-2 text-sm font-semibold text-berry">
             <Star aria-hidden="true" size={16} strokeWidth={2.25} />
             {profile.coins} estrelas
           </div>
         }
         name={`Olá, ${profile.name}`}
-        roleLabel="Painel do filho"
       />
 
       <main className="mx-auto grid w-full max-w-6xl gap-6 px-4 py-6 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,24rem)]">
@@ -92,10 +93,7 @@ export default async function ChildPage({ searchParams }: ChildPageProps) {
             ) : (
               <div className="grid gap-3">
                 {pendingTasks.map((task) => (
-                  <article
-                    className="rounded-md border border-stone-200 bg-paper p-4"
-                    key={task.id}
-                  >
+                  <article className="rounded-md bg-paper p-4" key={task.id}>
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                       <div>
                         <h3 className="font-semibold text-ink">{task.title}</h3>
@@ -112,7 +110,11 @@ export default async function ChildPage({ searchParams }: ChildPageProps) {
                       <form action={completeTask}>
                         <input name="task_id" type="hidden" value={task.id} />
                         <button className="button" type="submit">
-                          <Check aria-hidden="true" size={16} strokeWidth={2.25} />
+                          <Check
+                            aria-hidden="true"
+                            size={16}
+                            strokeWidth={2.25}
+                          />
                           Concluir
                         </button>
                       </form>
@@ -136,10 +138,7 @@ export default async function ChildPage({ searchParams }: ChildPageProps) {
             ) : (
               <div className="grid gap-3">
                 {completedTasks.map((task) => (
-                  <article
-                    className="rounded-md border border-pink-100 bg-white p-4"
-                    key={task.id}
-                  >
+                  <article className="rounded-md bg-white p-4" key={task.id}>
                     <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
                       <div>
                         <h3 className="font-semibold text-ink">{task.title}</h3>
@@ -186,15 +185,18 @@ export default async function ChildPage({ searchParams }: ChildPageProps) {
                   const canRedeem = profile.coins >= reward.cost;
 
                   return (
-                    <article
-                      className="rounded-md border border-pink-100 p-4"
-                      key={reward.id}
-                    >
+                    <article className="rounded-md bg-white p-4" key={reward.id}>
                       <div className="flex items-start justify-between gap-3">
                         <div>
-                          <h3 className="font-semibold text-ink">{reward.title}</h3>
+                          <h3 className="font-semibold text-ink">
+                            {reward.title}
+                          </h3>
                           <p className="mt-1 inline-flex items-center gap-1 text-sm font-semibold text-rose">
-                            <Star aria-hidden="true" size={15} strokeWidth={2.25} />
+                            <Star
+                              aria-hidden="true"
+                              size={15}
+                              strokeWidth={2.25}
+                            />
                             {reward.cost} estrelas
                           </p>
                         </div>
@@ -209,7 +211,11 @@ export default async function ChildPage({ searchParams }: ChildPageProps) {
                             disabled={!canRedeem}
                             type="submit"
                           >
-                            <Gift aria-hidden="true" size={16} strokeWidth={2.25} />
+                            <Gift
+                              aria-hidden="true"
+                              size={16}
+                              strokeWidth={2.25}
+                            />
                             Resgatar
                           </button>
                         </form>
@@ -222,6 +228,6 @@ export default async function ChildPage({ searchParams }: ChildPageProps) {
           </section>
         </aside>
       </main>
-    </>
+    </div>
   );
 }

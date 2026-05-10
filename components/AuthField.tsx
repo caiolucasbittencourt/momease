@@ -22,7 +22,7 @@ export function AuthField({
   return (
     <label className="field">
       <span className="label">{label}</span>
-      <span className="flex overflow-hidden rounded-md border border-pink-100 bg-slate-100 transition focus-within:border-rose focus-within:ring-2 focus-within:ring-rose/20">
+      <span className="flex overflow-hidden rounded-md border border-pink-100 bg-slate-100 transition-colors focus-within:border-pink-300">
         <input
           autoComplete={autoComplete}
           className="min-h-11 min-w-0 flex-1 bg-transparent px-3 py-2 text-sm text-stone-950 outline-none placeholder:text-stone-400"

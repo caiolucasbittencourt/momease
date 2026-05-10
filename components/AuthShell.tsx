@@ -11,7 +11,7 @@ export function AuthShell({ children }: AuthShellProps) {
         <div className="mx-auto w-full max-w-sm">{children}</div>
       </section>
 
-      <section className="hidden min-h-screen items-center justify-center bg-slate-100 px-10 py-12 lg:flex">
+      <section className="hidden min-h-screen items-center justify-center bg-[#d94f8a] px-10 py-12 lg:flex">
         <Image
           alt="Ilustração de organização familiar"
           className="max-h-[72vh] w-full max-w-xl object-contain"

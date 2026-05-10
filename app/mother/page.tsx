@@ -3,7 +3,7 @@ import {
   createChildAccount,
   createReward,
   createTask,
-  deleteReward
+  deleteReward,
 } from "@/app/actions/mother";
 import { DashboardHeader } from "@/components/DashboardHeader";
 import { EmptyState } from "@/components/EmptyState";
@@ -21,8 +21,8 @@ type MotherPageProps = {
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Dashboard | MonEase"
-  }
+    absolute: "Dashboard | MonEase",
+  },
 };
 
 const taskSuggestions = [
@@ -30,13 +30,13 @@ const taskSuggestions = [
   "Arrumar cama",
   "Guardar brinquedos",
   "Fazer dever de casa",
-  "Organizar mochila"
+  "Organizar mochila",
 ];
 
 function formatDate(value: string) {
   return new Intl.DateTimeFormat("pt-BR", {
     dateStyle: "short",
-    timeStyle: "short"
+    timeStyle: "short",
   }).format(new Date(value));
 }
 
@@ -54,7 +54,7 @@ export default async function MotherPage({ searchParams }: MotherPageProps) {
   const { data: taskRows } = await supabase
     .from("tasks")
     .select(
-      "id, family_id, title, details, assignee_id, deadline, status, completed_at"
+      "id, family_id, title, details, assignee_id, deadline, status, completed_at",
     )
     .eq("family_id", profile.family_id)
     .eq("status", "pending")
@@ -63,7 +63,7 @@ export default async function MotherPage({ searchParams }: MotherPageProps) {
   const { data: completedTaskRows } = await supabase
     .from("tasks")
     .select(
-      "id, family_id, title, details, assignee_id, deadline, status, completed_at"
+      "id, family_id, title, details, assignee_id, deadline, status, completed_at",
     )
     .eq("family_id", profile.family_id)
     .eq("status", "completed")
@@ -80,16 +80,18 @@ export default async function MotherPage({ searchParams }: MotherPageProps) {
   const completedTasks = ((completedTaskRows ?? []) as Task[]).sort(
     (left, right) => {
       const leftDate = new Date(left.completed_at ?? left.deadline).getTime();
-      const rightDate = new Date(right.completed_at ?? right.deadline).getTime();
+      const rightDate = new Date(
+        right.completed_at ?? right.deadline,
+      ).getTime();
 
       return rightDate - leftDate;
-    }
+    },
   );
   const rewards = (rewardRows ?? []) as Reward[];
   const childById = new Map(children.map((child) => [child.id, child]));
 
   return (
-    <>
+    <div className="min-h-screen bg-[#d94f8a]">
       <DashboardHeader name={`Olá, ${profile.name}`} />
 
       <main className="mx-auto grid w-full max-w-6xl gap-6 px-4 py-6 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,24rem)]">
@@ -111,7 +113,7 @@ export default async function MotherPage({ searchParams }: MotherPageProps) {
                   className="input"
                   list="task-suggestions"
                   name="title"
-                  placeholder="Ex: Arrumar cama"
+                  placeholder="Ex: Lavar louça"
                   required
                 />
                 <datalist id="task-suggestions">
@@ -126,7 +128,7 @@ export default async function MotherPage({ searchParams }: MotherPageProps) {
                 <textarea
                   className="input min-h-24 resize-y"
                   name="details"
-                  placeholder="Opcional"
+                  placeholder=""
                 />
               </label>
 
@@ -178,12 +180,14 @@ export default async function MotherPage({ searchParams }: MotherPageProps) {
 
                     return (
                       <article
-                        className="rounded-md border border-pink-100 bg-paper p-4"
+                        className="rounded-md bg-paper p-4"
                         key={task.id}
                       >
                         <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
                           <div>
-                            <h4 className="font-semibold text-ink">{task.title}</h4>
+                            <h4 className="font-semibold text-ink">
+                              {task.title}
+                            </h4>
                             {task.details ? (
                               <p className="mt-1 text-sm text-stone-600">
                                 {task.details}
@@ -215,20 +219,19 @@ export default async function MotherPage({ searchParams }: MotherPageProps) {
             </div>
 
             {completedTasks.length === 0 ? (
-              <EmptyState>Nenhuma tarefa concluída ainda.</EmptyState>
+              <EmptyState>Nenhuma tarefa concluída.</EmptyState>
             ) : (
               <div className="grid gap-3">
                 {completedTasks.map((task) => {
                   const child = childById.get(task.assignee_id);
 
                   return (
-                    <article
-                      className="rounded-md border border-pink-100 bg-white p-4"
-                      key={task.id}
-                    >
+                    <article className="rounded-md bg-white p-4" key={task.id}>
                       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
                         <div>
-                          <h4 className="font-semibold text-ink">{task.title}</h4>
+                          <h4 className="font-semibold text-ink">
+                            {task.title}
+                          </h4>
                           {task.details ? (
                             <p className="mt-1 text-sm text-stone-600">
                               {task.details}
@@ -273,12 +276,12 @@ export default async function MotherPage({ searchParams }: MotherPageProps) {
               </label>
 
               <label className="field">
-                <span className="label">Email de login</span>
+                <span className="label">E-mail</span>
                 <input className="input" name="email" type="email" required />
               </label>
 
               <label className="field">
-                <span className="label">Senha temporária</span>
+                <span className="label">Senha</span>
                 <input
                   className="input"
                   minLength={6}
@@ -305,7 +308,7 @@ export default async function MotherPage({ searchParams }: MotherPageProps) {
                 <div className="grid gap-2">
                   {children.map((child) => (
                     <div
-                      className="flex items-center justify-between rounded-md border border-pink-100 px-3 py-2"
+                      className="flex items-center justify-between rounded-md bg-paper px-3 py-2"
                       key={child.id}
                     >
                       <span className="font-medium text-ink">{child.name}</span>
@@ -362,25 +365,23 @@ export default async function MotherPage({ searchParams }: MotherPageProps) {
               <div className="grid gap-2">
                 {rewards.map((reward) => (
                   <div
-                    className="flex items-center justify-between gap-3 rounded-md border border-pink-100 px-3 py-2"
+                    className="flex items-center justify-between gap-3 rounded-md bg-paper px-3 py-2"
                     key={reward.id}
                   >
                     <div>
-                      <span className="font-medium text-ink">{reward.title}</span>
+                      <span className="font-medium text-ink">
+                        {reward.title}
+                      </span>
                       <span className="mt-1 flex items-center gap-1 text-sm font-semibold text-rose">
                         <Star aria-hidden="true" size={15} strokeWidth={2.25} />
                         {reward.cost} estrelas
                       </span>
                     </div>
                     <form action={deleteReward}>
-                      <input
-                        name="reward_id"
-                        type="hidden"
-                        value={reward.id}
-                      />
+                      <input name="reward_id" type="hidden" value={reward.id} />
                       <button
                         aria-label={`Excluir prêmio ${reward.title}`}
-                        className="button-secondary px-3"
+                        className="button px-3"
                         type="submit"
                       >
                         <Trash2
@@ -398,6 +399,6 @@ export default async function MotherPage({ searchParams }: MotherPageProps) {
           </section>
         </aside>
       </main>
-    </>
+    </div>
   );
 }

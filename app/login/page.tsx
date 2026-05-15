@@ -25,7 +25,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
   return (
     <AuthShell>
       <section className="space-y-7">
-        <div className="-mb-3 text-center sm:-mb-4">
+        <div className="-mt-4 text-center sm:-mt-5">
           <BrandWordmark />
         </div>
 

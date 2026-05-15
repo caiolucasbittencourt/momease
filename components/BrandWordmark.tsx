@@ -1,29 +1,35 @@
-import Image from "next/image";
+import { Quicksand } from "next/font/google";
+
+const quicksand = Quicksand({
+  subsets: ["latin"],
+  weight: ["700"],
+  display: "swap",
+});
 
 type BrandWordmarkProps = {
   compact?: boolean;
 };
 
 export function BrandWordmark({ compact = false }: BrandWordmarkProps) {
-  const widthClassName = compact
-    ? "w-16 sm:w-[4.5rem]"
-    : "mx-auto w-24 sm:w-36";
+  const containerClassName = compact
+    ? "inline-flex items-baseline leading-none"
+    : "mx-auto inline-flex items-baseline leading-none";
+  const textClassName = compact
+    ? "text-[1.65rem] tracking-[-0.06em] sm:text-[1.9rem]"
+    : "text-[3rem] tracking-[-0.08em] sm:text-[4rem]";
 
   return (
-    <div className={widthClassName}>
-      <Image
-        alt="MomEase"
-        className="h-auto w-full"
-        height={1500}
-        priority={!compact}
-        sizes={
-          compact
-            ? "(min-width: 640px) 72px, 64px"
-            : "(min-width: 640px) 144px, 96px"
-        }
-        src="/images/logo.svg"
-        width={1500}
-      />
+    <div className={containerClassName}>
+      <span
+        className={`${quicksand.className} ${textClassName} font-bold text-rose`}
+      >
+        mom
+      </span>
+      <span
+        className={`${quicksand.className} ${textClassName} font-bold text-berry`}
+      >
+        ease
+      </span>
     </div>
   );
 }

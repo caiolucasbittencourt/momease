@@ -9,14 +9,14 @@ export const metadata: Metadata = {
   },
   description: "Tarefas, estrelas e recompensas para familias.",
   icons: {
-    apple: "/images/logo.svg",
-    icon: "/images/logo.svg",
-    shortcut: "/images/logo.svg",
+    apple: "/images/favicon.png",
+    icon: "/images/favicon.png",
+    shortcut: "/images/favicon.png",
   },
 };
 
 export default function RootLayout({
-  children
+  children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {

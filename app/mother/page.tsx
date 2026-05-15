@@ -21,7 +21,7 @@ type MotherPageProps = {
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Dashboard | MonEase",
+    absolute: "Dashboard | MomEase",
   },
 };
 

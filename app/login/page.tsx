@@ -7,6 +7,7 @@ import { AuthField } from "@/components/AuthField";
 import { AuthShell } from "@/components/AuthShell";
 import { BrandWordmark } from "@/components/BrandWordmark";
 import { MessageBanner } from "@/components/MessageBanner";
+import { PendingSubmitButton } from "@/components/PendingSubmitButton";
 
 type LoginPageProps = {
   searchParams: Promise<{
@@ -50,9 +51,9 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
             type="password"
           />
 
-          <button className="button w-full" type="submit">
+          <PendingSubmitButton className="button w-full">
             Entrar
-          </button>
+          </PendingSubmitButton>
         </form>
 
         <div className="flex items-center gap-4 text-xs font-medium uppercase tracking-wide text-stone-400">

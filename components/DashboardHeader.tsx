@@ -17,7 +17,7 @@ export function DashboardHeader({
 
   return (
     <header className="bg-white">
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 py-5 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mx-auto flex w-full max-w-6xl flex-row flex-wrap items-center justify-between gap-4 px-4 py-5">
         <div className="flex items-center gap-3 sm:gap-4">
           <BrandWordmark compact />
           {shouldShowTitle ? (

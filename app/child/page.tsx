@@ -73,7 +73,6 @@ export default async function ChildPage({ searchParams }: ChildPageProps) {
             {profile.coins} estrelas
           </div>
         }
-        name={`Olá, ${profile.name}`}
       />
 
       <main className="mx-auto grid w-full max-w-6xl gap-6 px-4 py-6 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,24rem)]">
@@ -185,7 +184,10 @@ export default async function ChildPage({ searchParams }: ChildPageProps) {
                   const canRedeem = profile.coins >= reward.cost;
 
                   return (
-                    <article className="rounded-md bg-white p-4" key={reward.id}>
+                    <article
+                      className="rounded-md bg-white p-4"
+                      key={reward.id}
+                    >
                       <div className="flex items-start justify-between gap-3">
                         <div>
                           <h3 className="font-semibold text-ink">

@@ -92,7 +92,7 @@ export default async function MotherPage({ searchParams }: MotherPageProps) {
 
   return (
     <div className="min-h-screen bg-[#d94f8a]">
-      <DashboardHeader name={`Olá, ${profile.name}`} />
+      <DashboardHeader />
 
       <main className="mx-auto grid w-full max-w-6xl gap-6 px-4 py-6 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,24rem)]">
         <div className="space-y-6">
@@ -113,7 +113,7 @@ export default async function MotherPage({ searchParams }: MotherPageProps) {
                   className="input"
                   list="task-suggestions"
                   name="title"
-                  placeholder="Ex: Lavar louça"
+                  placeholder="Ex: Lavar a louça"
                   required
                 />
                 <datalist id="task-suggestions">

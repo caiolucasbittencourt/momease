@@ -9,6 +9,7 @@ import {
   redirectWithMessage,
 } from "@/app/actions/helpers";
 import { requireProfile } from "@/lib/auth";
+import { parseDateTimeLocal } from "@/lib/datetime";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 
 export async function createChildAccount(formData: FormData) {
@@ -97,9 +98,10 @@ export async function createTask(formData: FormData) {
   const details = formOptionalText(formData, "details");
   const assigneeId = formText(formData, "assignee_id");
   const deadlineRaw = formText(formData, "deadline");
-  const deadline = new Date(deadlineRaw);
+  const deadlineOffsetRaw = formText(formData, "deadline_timezone_offset");
+  const deadline = parseDateTimeLocal(deadlineRaw, deadlineOffsetRaw);
 
-  if (!title || !assigneeId || Number.isNaN(deadline.getTime())) {
+  if (!title || !assigneeId || !deadline) {
     redirect(
       redirectWithMessage(
         "/mother",

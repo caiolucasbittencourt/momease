@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { completeTask, redeemReward } from "@/app/actions/child";
 import { DashboardHeader } from "@/components/DashboardHeader";
 import { EmptyState } from "@/components/EmptyState";
+import { LocalDateTimeText } from "@/components/LocalDateTimeText";
 import { MessageBanner } from "@/components/MessageBanner";
 import { requireProfile } from "@/lib/auth";
 import type { Reward, Task } from "@/lib/types";
@@ -19,13 +20,6 @@ export const metadata: Metadata = {
     absolute: "Dashboard | MonEase",
   },
 };
-
-function formatDate(value: string) {
-  return new Intl.DateTimeFormat("pt-BR", {
-    dateStyle: "short",
-    timeStyle: "short",
-  }).format(new Date(value));
-}
 
 export default async function ChildPage({ searchParams }: ChildPageProps) {
   const params = await searchParams;
@@ -102,7 +96,7 @@ export default async function ChildPage({ searchParams }: ChildPageProps) {
                           </p>
                         ) : null}
                         <p className="mt-3 text-sm text-stone-600">
-                          Prazo: {formatDate(task.deadline)}
+                          Prazo: <LocalDateTimeText value={task.deadline} />
                         </p>
                       </div>
 
@@ -152,11 +146,13 @@ export default async function ChildPage({ searchParams }: ChildPageProps) {
                       </span>
                     </div>
                     <div className="mt-3 space-y-1 text-sm text-stone-600">
-                      <p>Prazo: {formatDate(task.deadline)}</p>
+                      <p>
+                        Prazo: <LocalDateTimeText value={task.deadline} />
+                      </p>
                       <p>
                         Conclusão:{" "}
                         {task.completed_at
-                          ? formatDate(task.completed_at)
+                          ? <LocalDateTimeText value={task.completed_at} />
                           : "data não registrada"}
                       </p>
                     </div>

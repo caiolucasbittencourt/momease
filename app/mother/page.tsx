@@ -7,6 +7,8 @@ import {
 } from "@/app/actions/mother";
 import { DashboardHeader } from "@/components/DashboardHeader";
 import { EmptyState } from "@/components/EmptyState";
+import { LocalDateTimeInput } from "@/components/LocalDateTimeInput";
+import { LocalDateTimeText } from "@/components/LocalDateTimeText";
 import { MessageBanner } from "@/components/MessageBanner";
 import { requireProfile } from "@/lib/auth";
 import type { Profile, Reward, Task } from "@/lib/types";
@@ -32,13 +34,6 @@ const taskSuggestions = [
   "Fazer dever de casa",
   "Organizar mochila",
 ];
-
-function formatDate(value: string) {
-  return new Intl.DateTimeFormat("pt-BR", {
-    dateStyle: "short",
-    timeStyle: "short",
-  }).format(new Date(value));
-}
 
 export default async function MotherPage({ searchParams }: MotherPageProps) {
   const params = await searchParams;
@@ -146,10 +141,9 @@ export default async function MotherPage({ searchParams }: MotherPageProps) {
 
               <label className="field">
                 <span className="label">Prazo</span>
-                <input
+                <LocalDateTimeInput
                   className="input"
                   name="deadline"
-                  type="datetime-local"
                   required
                 />
               </label>
@@ -200,7 +194,7 @@ export default async function MotherPage({ searchParams }: MotherPageProps) {
                         </div>
                         <p className="mt-3 text-sm text-stone-600">
                           {child?.name ?? "Responsável removido"} -{" "}
-                          {formatDate(task.deadline)}
+                          <LocalDateTimeText value={task.deadline} />
                         </p>
                       </article>
                     );
@@ -244,11 +238,15 @@ export default async function MotherPage({ searchParams }: MotherPageProps) {
                       </div>
                       <div className="mt-3 space-y-1 text-sm text-stone-600">
                         <p>{child?.name ?? "Responsável removido"}</p>
-                        <p>Prazo: {formatDate(task.deadline)}</p>
+                        <p>
+                          Prazo: <LocalDateTimeText value={task.deadline} />
+                        </p>
                         <p>
                           Conclusão:{" "}
                           {task.completed_at
-                            ? formatDate(task.completed_at)
+                            ? (
+                                <LocalDateTimeText value={task.completed_at} />
+                              )
                             : "data não registrada"}
                         </p>
                       </div>
@@ -305,7 +303,7 @@ export default async function MotherPage({ searchParams }: MotherPageProps) {
 
               <button className="button w-full" type="submit">
                 <UserPlus aria-hidden="true" size={16} strokeWidth={2.25} />
-                Adicionar filho
+                Adicionar filho(a)
               </button>
             </form>
 

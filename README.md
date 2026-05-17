@@ -1,6 +1,6 @@
 # MomEase
 
-> Projeto desenvolvido para o **Hackathon de Dia das Mães do [Servidor dos Programadores](https://discord.gg/programador)**.
+> Projeto desenvolvido para o **Hackathon de Dia das Mães do Servidor dos Programadores**.
 > **A melhor comunidade dev do Brasil**: [clique aqui para fazer parte](https://discord.gg/programador).
 
 **MomEase** ajuda mães a organizar a rotina da casa com mais clareza, menos cobrança e mais participação dos filhos.

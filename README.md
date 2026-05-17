@@ -86,6 +86,16 @@ O projeto propõe uma forma de **apoiar mães com tecnologia útil no dia a dia*
 - `/mother`: dashboard da mãe
 - `/child`: dashboard do filho
 
+## Screenshots
+
+### Login
+
+![Tela de login do MomEase](public/images/login.png)
+
+### Dashboard
+
+![Dashboard do MomEase](public/images/dashboard.png)
+
 ## Tecnologias
 
 - **Next.js** com App Router

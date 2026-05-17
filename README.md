@@ -3,7 +3,7 @@
 > Projeto desenvolvido para o **Hackathon de Dia das Mães do [Servidor dos Programadores](https://discord.gg/programador)**.
 > **A melhor comunidade dev do Brasil**: [clique aqui para fazer parte](https://discord.gg/programador).
 
-**MomEase** é uma plataforma criada para o contexto do **Dia das Mães** com um objetivo simples: **reduzir a carga mental das mães na organização da rotina da casa**.
+**MomEase** ajuda mães a organizar a rotina da casa com mais clareza, menos cobrança e mais participação dos filhos.
 
 O problema que o MomEase ataca é concreto e mensurável. Segundo o [IBGE](https://agenciadenoticias.ibge.gov.br/agencia-noticias/2012-agencia-de-noticias/noticias/37621-em-2022-mulheres-dedicaram-9-6-horas-por-semana-a-mais-do-que-os-homens-aos-afazeres-domesticos-ou-ao-cuidado-de-pessoas), em 2022 as mulheres dedicaram, em média, **21,3 horas por semana** a afazeres domésticos e/ou cuidado de pessoas, contra **11,7 horas** dos homens. A diferença foi de **9,6 horas semanais**.
 

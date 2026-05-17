@@ -45,7 +45,7 @@ body {
   }
 
   .input {
-    @apply w-full rounded-md border border-pink-200 bg-white px-3 py-2 text-sm text-stone-950 outline-none transition-colors focus:border-pink-300;
+    @apply w-full rounded-md border border-pink-100 bg-stone-50 px-3 py-2 text-sm text-stone-950 outline-none transition-colors focus:border-pink-300 focus:bg-white;
   }
 
   .button {

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { completeTask, redeemReward } from "@/app/actions/child";
+import { AppFooter } from "@/components/AppFooter";
 import { DashboardHeader } from "@/components/DashboardHeader";
 import { EmptyState } from "@/components/EmptyState";
 import { LocalDateTimeText } from "@/components/LocalDateTimeText";
@@ -59,17 +60,17 @@ export default async function ChildPage({ searchParams }: ChildPageProps) {
   const rewards = (rewardRows ?? []) as Reward[];
 
   return (
-    <div className="min-h-screen bg-[#d94f8a]">
+    <div className="flex min-h-screen flex-col bg-[#d94f8a]">
       <DashboardHeader
         aside={
-          <div className="inline-flex items-center gap-2 rounded-md bg-blush px-4 py-2 text-sm font-semibold text-berry">
+          <div className="inline-flex items-center gap-2 rounded-md bg-yellow-50 px-4 py-2 text-sm font-semibold text-yellow-700">
             <Star aria-hidden="true" size={16} strokeWidth={2.25} />
             {profile.coins} estrelas
           </div>
         }
       />
 
-      <main className="mx-auto grid w-full max-w-6xl gap-6 px-4 py-6 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,24rem)]">
+      <main className="mx-auto grid w-full max-w-6xl flex-1 gap-6 px-4 py-6 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,24rem)]">
         <div className="space-y-6">
           <MessageBanner error={params.error} notice={params.notice} />
 
@@ -189,7 +190,7 @@ export default async function ChildPage({ searchParams }: ChildPageProps) {
                           <h3 className="font-semibold text-ink">
                             {reward.title}
                           </h3>
-                          <p className="mt-1 inline-flex items-center gap-1 text-sm font-semibold text-rose">
+                          <p className="mt-1 inline-flex items-center gap-1 text-sm font-semibold text-yellow-700">
                             <Star
                               aria-hidden="true"
                               size={15}
@@ -226,6 +227,8 @@ export default async function ChildPage({ searchParams }: ChildPageProps) {
           </section>
         </aside>
       </main>
+
+      <AppFooter />
     </div>
   );
 }

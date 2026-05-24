@@ -3,6 +3,10 @@
 > Projeto desenvolvido para o **Hackathon de Dia das Mães do Servidor dos Programadores**.
 > **A melhor comunidade dev do Brasil**: [clique aqui para fazer parte](https://discord.gg/programador).
 
+Projeto vencedor do Hackathon de Dia das Mães do Servidor dos Programadores, realizado em **maio de 2026**. Agradeço à organização e à comunidade do Servidor dos Programadores pelo apoio e pela iniciativa.
+
+## Sobre o projeto
+
 **MomEase** ajuda mães a organizar a rotina da casa com mais clareza, menos cobrança e mais participação dos filhos.
 
 O problema que o MomEase ataca é concreto e mensurável. Segundo o [IBGE](https://agenciadenoticias.ibge.gov.br/agencia-noticias/2012-agencia-de-noticias/noticias/37621-em-2022-mulheres-dedicaram-9-6-horas-por-semana-a-mais-do-que-os-homens-aos-afazeres-domesticos-ou-ao-cuidado-de-pessoas), em 2022 as mulheres dedicaram, em média, **21,3 horas por semana** a afazeres domésticos e/ou cuidado de pessoas, contra **11,7 horas** dos homens. A diferença foi de **9,6 horas semanais**.
@@ -25,7 +29,7 @@ Esse trabalho invisível costuma recair sobre a mãe.
 
 O MomEase foi pensado para aliviar exatamente esse ponto: em vez de depender só de cobrança verbal e memória, a família passa a usar uma experiência simples, visual e motivadora.
 
-## Proposta para o hackathon de Dia das Mães
+## Proposta para o hackathon
 
 No Dia das Mães, falar de cuidado também é falar de **tempo, energia e sobrecarga emocional**.
 
@@ -86,16 +90,6 @@ O projeto propõe uma forma de **apoiar mães com tecnologia útil no dia a dia*
 - `/mother`: dashboard da mãe
 - `/child`: dashboard do filho
 
-## Screenshots
-
-### Login
-
-![Tela de login do MomEase](public/images/login.png)
-
-### Dashboard
-
-![Dashboard do MomEase](public/images/dashboard.png)
-
 ## Tecnologias
 
 - **Next.js** com App Router
@@ -132,3 +126,7 @@ Use `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` em projetos Supabase mais novos. A ch
 ```bash
 npm run dev
 ```
+
+## Licença
+
+Este projeto está sob a licença [MIT](LICENSE).
